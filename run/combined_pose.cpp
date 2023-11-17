@@ -291,7 +291,11 @@ int combine_infer() {
 }
 
 int combine_infer_main() {
+    // single thread infer
     combine_infer();
+    
+    // multi thread infer
+
     //combine_pose combine;
     //combine.init();
     //combine.combine_infer();
