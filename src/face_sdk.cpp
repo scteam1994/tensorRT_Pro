@@ -142,11 +142,17 @@ inline void Face_rec::create_face_bank(std::string img_folder) {
         }
         if (bank_size != update_bank_size()) {
             INFOW("Face bank size does not match. This may cause unknown error.Please rebuild face bank");
+            return;
         }
+
+        checkCudaRuntime(cudaMalloc((void**)&bank_d, sizeof(float) * bank_size * feature_size));
+        checkCudaRuntime(cudaMemcpy(bank_d, bank, sizeof(float) * bank_size * feature_size, cudaMemcpyHostToDevice));
+
     }
     else {
         INFO("Face bank folder is not a directory");
     }
+
 
     return;
 
@@ -175,9 +181,14 @@ inline void Face_rec::create_face_bank(vector<Mat> mat) {
 		INFO("“—∂¡»°%d’≈Õº∆¨°£", bank_size);
         if (bank_size != update_bank_size()) {
             INFOW("Face bank size does not match. This may cause unknown error.Please rebuild face bank");
+            return;
         }
+        checkCudaRuntime(cudaMalloc((void**)&bank_d, sizeof(float) * bank_size * feature_size));
+        checkCudaRuntime(cudaMemcpy(bank_d, bank, sizeof(float) * bank_size * feature_size, cudaMemcpyHostToDevice));
+
 	}
-	return;
+
+    return;
 
 }
 
@@ -256,30 +267,36 @@ inline void Face_rec::register_face(cv::Mat& img, string& ID) {
     }
     if (bank_size != update_bank_size()) {
         INFOW("Face bank size does not match. This may cause unknown error.Please rebuild face bank");
+        return;
 	}
+    bank_d = nullptr;
+    checkCudaRuntime(cudaMalloc((void**)&bank_d, sizeof(float) * bank_size * feature_size));
+    checkCudaRuntime(cudaMemcpy(bank_d, bank, sizeof(float) * bank_size * feature_size, cudaMemcpyHostToDevice));
+
+
     return;
 }
 
 inline void Face_rec::compare_face_bank_gpu(Arcface::feature& out, float* res) {
+    if (bank_d == nullptr) {
+		INFOE("Face bank is empty, Please create face bank before use");
+        return;
+    }
     // cv::Mat to float*
     float* output = out.ptr<float>(0);
-
     float* res_d = nullptr;
-    float* bank_d = nullptr;
     float* output_d = nullptr;
-
-    checkCudaRuntime(cudaMalloc((void**)&bank_d, sizeof(float) * bank_size * feature_size));
     checkCudaRuntime(cudaMalloc((void**)&output_d, sizeof(float) * feature_size));
     checkCudaRuntime(cudaMalloc((void**)&res_d, sizeof(float) * bank_size));
-
     checkCudaRuntime(cudaMemcpy(res_d, res, sizeof(float) * bank_size, cudaMemcpyHostToDevice));
-    checkCudaRuntime(cudaMemcpy(bank_d, bank, sizeof(float) * bank_size * feature_size, cudaMemcpyHostToDevice));
     checkCudaRuntime(cudaMemcpy(output_d, output, sizeof(float) * feature_size, cudaMemcpyHostToDevice));
 
     compare_face(output_d, bank_d, res_d, bank_size, feature_size);
     checkCudaRuntime(cudaMemcpy(res, res_d, sizeof(float) * bank_size, cudaMemcpyDeviceToHost));
 
 }
+
+
 
 inline void Face_rec::combine_infer(cv::Mat& frame, Face::Result& res) {
     if (frame.empty()) {
@@ -359,7 +376,8 @@ inline bool Face_rec::get_embedding(Mat& img, Arcface::feature& out) {
 }
 
 inline bool Face_rec::detect_face(Mat& img, FaceDetector::BoxArray& res) {
-    res = engine_scrfd->commit(img).get();
+    auto box = engine_scrfd->commit(img).get();
+    res = box;
     if (res.size() == 0) {
 		INFOE("No face detected");
 		return false;

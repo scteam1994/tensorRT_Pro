@@ -59,8 +59,8 @@ namespace Face {
         shared_ptr<Scrfd::Infer> engine_scrfd;
         shared_ptr<Arcface::Infer> engine_arcface;
         
-        float* bank;
-        
+        float* bank = nullptr;
+        float* bank_d = nullptr;
         
 
 

@@ -39,5 +39,13 @@ int app_face_sdk() {
     face_rec.register_face(img,ID);
     cout << "ID:" <<ID << endl;
     cout << "bank_size:" << face_rec.update_bank_size() << endl;
+    face_rec.combine_infer(ref(img), ref(res));
+    cout << "res_size:" << res.size() << endl;
+    for (int i = 0; i < res.size(); i++) {
+        cout << "ID:" << res[i].ID << endl;
+        cout << "distance:" << res[i].distance << endl;
+        cout << "face:" << res[i].face.left << res[i].face.top << res[i].face.right << res[i].face.bottom << endl;
+        //cout << "embedding" << res[i].embedding<< endl;
+    }
     return 0;
 }
