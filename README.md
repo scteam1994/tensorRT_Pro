@@ -51,3 +51,4 @@ int combine_infer_main() {
 ```
 
 在src/combine_pose.cpp中示例了如何多线程和单线程进行推理，多线程demo中尝试了流水线异步infer，但是不知道为什么没有效果，添加了异步之后yolo的infer时间变得很长，总fps没有什么变化，不知道是不是和机器有关还是说和原项目中的 class InferImpl 中的机制有关，如果有人能运行起来这个项目，麻烦告诉我一下，谢谢。
+我已经试过取消infer_controller.hpp中的std::unique_lock<std::mutex> l(jobs_lock_);，没有效果。
