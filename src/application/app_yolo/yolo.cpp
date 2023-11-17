@@ -6,8 +6,8 @@
 #include <infer/trt_infer.hpp>
 #include <common/ilogger.hpp>
 #include <common/infer_controller.hpp>
-#include <common/preprocess_kernel.cuh>
 #include <common/monopoly_allocator.hpp>
+#include <common/preprocess_kernel.cuh>
 #include <common/cuda_tools.hpp>
 
 namespace Yolo{
@@ -286,6 +286,7 @@ namespace Yolo{
             }
             stream_ = nullptr;
             tensor_allocator_.reset();
+            engine.reset();
             INFO("Engine destroy.");
         }
 

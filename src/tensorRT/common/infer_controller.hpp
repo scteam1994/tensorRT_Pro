@@ -67,7 +67,7 @@ public:
         
         ///////////////////////////////////////////////////////////
         {
-            std::unique_lock<std::mutex> l(jobs_lock_);
+            //std::unique_lock<std::mutex> l(jobs_lock_);
             jobs_.push(job);
         };
         cond_.notify_one();

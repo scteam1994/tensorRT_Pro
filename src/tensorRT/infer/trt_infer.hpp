@@ -2,7 +2,7 @@
 
 #ifndef TRT_INFER_HPP
 #define TRT_INFER_HPP
-
+#include "global_export.h"
 #include <string>
 #include <memory>
 #include <vector>
@@ -45,7 +45,7 @@ namespace TRT {
 	int get_device_count();
 	int get_device();
 	
-	void set_device(int device_id);
+	TRT_EXPORT void set_device(int device_id);
 	std::shared_ptr<Infer> load_infer_from_memory(const void* pdata, size_t size);
 	std::shared_ptr<Infer> load_infer(const std::string& file);
 	bool init_nv_plugins();

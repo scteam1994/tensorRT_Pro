@@ -1,4 +1,5 @@
-﻿
+﻿#pragma once
+
 #if defined(_WIN32)
 #	define U_OS_WINDOWS
 #else

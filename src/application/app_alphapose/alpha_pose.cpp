@@ -64,6 +64,7 @@ namespace AlphaPose{
         }
         
         bool startup(const string& file, int gpuid){
+            cout<< file << endl;
             return ControllerImpl::startup(make_tuple(file, gpuid));
         }
     

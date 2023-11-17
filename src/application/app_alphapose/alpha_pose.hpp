@@ -1,5 +1,9 @@
+#pragma once
+
 #ifndef ALPHA_POSE_HPP
 #define ALPHA_POSE_HPP
+
+#include "global_export.h"
 
 #include <vector>
 #include <memory>
@@ -64,13 +68,13 @@ namespace AlphaPose{
 
     typedef tuple<Mat, Rect> Input;
 
-    class Infer{
+    class TRT_EXPORT Infer{
     public:
         virtual shared_future<vector<Point3f>> commit(const Input& input) = 0;
         virtual vector<shared_future<vector<Point3f>>> commits(const vector<Input>& inputs) = 0;
     };
 
-    shared_ptr<Infer> create_infer(const string& engine_file, int gpuid);
+    TRT_EXPORT shared_ptr<Infer> create_infer(const string& engine_file, int gpuid);
 
 }; // namespace AlphaPose
 

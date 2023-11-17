@@ -2,7 +2,7 @@
 
 #ifndef TRT_BUILDER_HPP
 #define TRT_BUILDER_HPP
-
+#include "global_export.h"
 #include <string>
 #include <vector>
 #include <functional>
@@ -13,12 +13,12 @@ namespace TRT {
 	typedef std::function<void(int current, int count, const std::vector<std::string>& files, std::shared_ptr<Tensor>& tensor)> Int8Process;
 	typedef std::function<std::vector<int64_t>(const std::string& name, const std::vector<int64_t>& shape)> LayerHookFuncReshape;
 
-	enum class ModelSourceType : int{
+	enum class TRT_EXPORT ModelSourceType : int{
 		OnnX,
 		OnnXData
 	};
 
-	class ModelSource {
+	class TRT_EXPORT ModelSource {
 	public:
 		ModelSource() = default;
 		ModelSource(const std::string& onnxmodel);
@@ -51,12 +51,12 @@ namespace TRT {
 		ModelSourceType type_;
 	};
 
-	enum class CompileOutputType : int{
+	enum class TRT_EXPORT CompileOutputType : int{
 		File,
 		Memory
 	};
 
-	class CompileOutput{
+	class TRT_EXPORT CompileOutput{
 	public:
 		CompileOutput(CompileOutputType type = CompileOutputType::Memory);
 		CompileOutput(const std::string& file);
@@ -74,7 +74,7 @@ namespace TRT {
 		std::string file_;
 	};
 
-	class InputDims {
+	class TRT_EXPORT InputDims {
 	public:
 		InputDims() = default;
 		
@@ -88,15 +88,15 @@ namespace TRT {
 		std::vector<int> dims_;
 	};
 
-	enum class Mode : int {
+	enum class TRT_EXPORT Mode : int {
 		FP32,
 		FP16,
 		INT8
 	};
 
-	const char* mode_string(Mode type);
+	TRT_EXPORT const char* mode_string(Mode type);
 
-	void set_layer_hook_reshape(const LayerHookFuncReshape& func);
+	TRT_EXPORT void set_layer_hook_reshape(const LayerHookFuncReshape& func);
 
 	/** 当处于INT8模式时，int8process必须制定
 	     int8ImageDirectory和int8EntropyCalibratorFile指定一个即可
@@ -106,7 +106,11 @@ namespace TRT {
 		当处于FP32或者FP16时，int8process、int8ImageDirectory、int8EntropyCalibratorFile都不需要指定 
 		对于嵌入式设备，请把maxWorkspaceSize设置小一点，比如128MB = 1ul << 27
 	**/
-	bool compile(
+
+
+
+
+	TRT_EXPORT bool compile(
 		Mode mode,
 		unsigned int maxBatchSize,
 		const ModelSource& source,

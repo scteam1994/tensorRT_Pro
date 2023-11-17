@@ -615,7 +615,7 @@ namespace TRT {
 				descript.c_str()
 			);
 		}
-		
+		cout<<maxBatchSize<<endl;
 		builder->setMaxBatchSize(maxBatchSize);
 		config->setMaxWorkspaceSize(maxWorkspaceSize);
 
