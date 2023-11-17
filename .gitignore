@@ -73,12 +73,10 @@ __pycache__
 *.lib
 *.exp
 
-!/3rdParty/README.MD
-/3rdParty/*
-/lean/cudnn8.2.2.26
-/lean/opencv3.4.6
-/lean/protobuf3.11.4
-/lean/TensorRT-8.0.1.6
+/3rdParty/cudnn-windows-x86_64-8.9.5.29_cuda11-archive
+/3rdParty/opencv3.4.6
+/3rdParty/protobuf3.11.4
+/3rdParty/TensorRT-8.5.3.1
 
 __pycache__
 
