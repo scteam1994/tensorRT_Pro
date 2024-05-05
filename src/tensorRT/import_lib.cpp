@@ -8,9 +8,9 @@
 
 #ifdef U_OS_WINDOWS
 #if defined(_DEBUG)
-#	pragma comment(lib, "opencv_world346d.lib")
+#	pragma comment(lib, "opencv_world490d.lib")
 #else
-#	pragma comment(lib, "opencv_world346.lib")
+#	pragma comment(lib, "opencv_world490.lib")
 #endif
 
 //导入cuda

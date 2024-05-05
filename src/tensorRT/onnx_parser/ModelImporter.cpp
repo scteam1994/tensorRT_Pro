@@ -98,7 +98,7 @@ Status parseGraph(IImporterContext* ctx, const ::onnx::GraphProto& graph, bool d
     // Import initializers.
     for (const ::onnx::TensorProto& initializer : graph.initializer())
     {
-        LOG_VERBOSE("Importing initializer: " << initializer.name());
+        LOG_INFO("Importing initializer: " << initializer.name());
         ShapedWeights weights;
         ASSERT(convertOnnxWeights(initializer, &weights, ctx) && "Failed to import initializer.", ErrorCode::kUNSUPPORTED_NODE);
         ctx->registerTensor(TensorOrWeights{std::move(weights)}, initializer.name());
@@ -116,7 +116,8 @@ Status parseGraph(IImporterContext* ctx, const ::onnx::GraphProto& graph, bool d
         }
         const auto& node = graph.node(nodeIndex);
         const std::string& nodeName = getNodeName(node);
-        LOG_VERBOSE("Parsing node: " << nodeName << " [" << node.op_type() << "]");
+        LOG_INFO("Parsing node: " << nodeName << " [" << node.op_type() << "]");
+        std::cout<<"Parsing node: " << nodeName << " [" << node.op_type() << "]"<<std::endl;
 
         // Assemble node inputs. These may come from outside the subgraph.
         std::vector<TensorOrWeights> nodeInputs;
@@ -132,13 +133,16 @@ Status parseGraph(IImporterContext* ctx, const ::onnx::GraphProto& graph, bool d
             }
             else
             {
-                LOG_VERBOSE("Searching for input: " << inputName);
+                LOG_INFO("Searching for input: " << inputName);
+                std::cout<<"Searching for input: " << inputName<<std::endl;
                 ASSERT( (ctx->tensors().count(inputName)) && "Node input was not registered.", ErrorCode::kINVALID_GRAPH);
                 nodeInputs.push_back(ctx->tensors().at(inputName));
                 ssInputs << "[" << inputName << " -> " << nodeInputs.back().shape() << "[" << nodeInputs.back().getType() << "]" <<"], ";
+                std:cout << "[" << inputName << " -> " << nodeInputs.back().shape() << "[" << nodeInputs.back().getType() << "]" <<"], "<<std::endl;
             }
         }
-        LOG_VERBOSE(ssInputs.str());
+        //LOG_INFO(ssInputs.str());
+        //std:cout<<ssInputs.str()<<std::endl;
 
         // Dispatch to appropriate converter.
         const NodeImporter* importFunc{nullptr};

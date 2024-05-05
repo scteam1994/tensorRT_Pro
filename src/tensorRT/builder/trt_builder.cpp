@@ -615,10 +615,8 @@ namespace TRT {
 				descript.c_str()
 			);
 		}
-		cout<<maxBatchSize<<endl;
 		builder->setMaxBatchSize(maxBatchSize);
 		config->setMaxWorkspaceSize(maxWorkspaceSize);
-
 		auto profile = builder->createOptimizationProfile();
 		for(int i = 0; i < net_num_input; ++i){
 			auto input = network->getInput(i);

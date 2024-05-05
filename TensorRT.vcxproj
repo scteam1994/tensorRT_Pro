@@ -15,30 +15,35 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="face_sdk.cpp" />
     <ClCompile Include="src\application\app_alphapose\alpha_pose.cpp" />
     <ClCompile Include="src\application\app_alphapose_old\alpha_pose_old.cpp" />
     <ClCompile Include="src\application\app_arcface\arcface.cpp" />
     <ClCompile Include="src\application\app_centernet\centernet.cpp" />
     <ClCompile Include="src\application\app_dbface\dbface.cpp" />
     <ClCompile Include="src\application\app_fall_gcn\fall_gcn.cpp" />
+    <ClCompile Include="src\application\app_handpose\handpose.cpp" />
     <ClCompile Include="src\application\app_high_performance\alpha_pose_high_perf.cpp" />
     <ClCompile Include="src\application\app_high_performance\high_performance.cpp" />
     <ClCompile Include="src\application\app_high_performance\yolo_high_perf.cpp" />
+    <ClCompile Include="src\application\app_movenet\movenet.cpp" />
     <ClCompile Include="src\application\app_python\interface.cpp" />
     <ClCompile Include="src\application\app_retinaface\retinaface.cpp" />
     <ClCompile Include="src\application\app_scrfd\scrfd.cpp" />
-    <ClCompile Include="src\application\app_yolo_gpuptr\yolo_gpuptr.cpp" />
     <ClCompile Include="src\application\app_yolo\yolo.cpp" />
+    <ClCompile Include="src\application\app_yolo_gpuptr\yolo_gpuptr.cpp" />
     <ClCompile Include="src\application\app_yolo\multi_gpu.cpp" />
     <ClCompile Include="src\application\app_yolo_fast\yolo_fast.cpp" />
+    <ClCompile Include="src\application\app_yolo_pose\yolo_pose.cpp" />
     <ClCompile Include="src\application\tools\auto_download.cpp" />
     <ClCompile Include="src\application\tools\deepsort.cpp" />
+    <ClCompile Include="src\application\tools\kalman_kpt.cpp" />
+    <ClCompile Include="src\application\tools\onnx2trt.cpp" />
     <ClCompile Include="src\direct\direct_mae.cpp" />
     <ClCompile Include="src\direct\direct_unet.cpp" />
     <ClCompile Include="src\direct\direct_yolo.cpp" />
     <ClCompile Include="src\direct\direct_classifier.cpp" />
-    <ClCompile Include="src\face_sdk.cpp" />
-    <ClCompile Include="src\pose_sdk.cpp" />
+    <ClCompile Include="src\hand_person_pose_sdk.cpp" />
     <ClCompile Include="src\tensorRT\builder\trt_builder.cpp" />
     <ClCompile Include="src\tensorRT\common\cuda_tools.cpp" />
     <ClCompile Include="src\tensorRT\common\ilogger.cpp" />
@@ -63,27 +68,32 @@
     <None Include="dll_export.def" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="face_sdk.hpp" />
+    <ClInclude Include="global_export.h" />
     <ClInclude Include="src\application\app_alphapose\alpha_pose.hpp" />
     <ClInclude Include="src\application\app_alphapose_old\alpha_pose_old.hpp" />
     <ClInclude Include="src\application\app_arcface\arcface.hpp" />
     <ClInclude Include="src\application\app_centernet\centernet.hpp" />
     <ClInclude Include="src\application\app_dbface\dbface.hpp" />
     <ClInclude Include="src\application\app_fall_gcn\fall_gcn.hpp" />
+    <ClInclude Include="src\application\app_handpose\handpose.hpp" />
     <ClInclude Include="src\application\app_high_performance\alpha_pose_high_perf.hpp" />
     <ClInclude Include="src\application\app_high_performance\high_performance.hpp" />
     <ClInclude Include="src\application\app_high_performance\yolo_high_perf.hpp" />
+    <ClInclude Include="src\application\app_movenet\movenet.hpp" />
     <ClInclude Include="src\application\app_retinaface\retinaface.hpp" />
     <ClInclude Include="src\application\app_scrfd\scrfd.hpp" />
-    <ClInclude Include="src\application\app_yolo\yolo.hpp" />
     <ClInclude Include="src\application\app_yolo\multi_gpu.hpp" />
+    <ClInclude Include="src\application\app_yolo\yolo.hpp" />
     <ClInclude Include="src\application\app_yolo_fast\yolo_fast.hpp" />
     <ClInclude Include="src\application\app_yolo_gpuptr\yolo_gpuptr.hpp" />
+    <ClInclude Include="src\application\app_yolo_pose\yolo_decode_pose.h" />
+    <ClInclude Include="src\application\app_yolo_pose\yolo_pose.hpp" />
     <ClInclude Include="src\application\common\face_detector.hpp" />
-    <ClInclude Include="src\application\global_export.h" />
     <ClInclude Include="src\application\tools\deepsort.hpp" />
+    <ClInclude Include="src\application\tools\kalman_kpt.hpp" />
     <ClInclude Include="src\application\tools\pybind11.hpp" />
-    <ClInclude Include="src\face_sdk.hpp" />
-    <ClInclude Include="src\pose_sdk.hpp" />
+    <ClInclude Include="src\hand_person_pose_sdk.hpp" />
     <ClInclude Include="src\tensorRT\builder\trt_builder.hpp" />
     <ClInclude Include="src\tensorRT\common\cuda_tools.hpp" />
     <ClInclude Include="src\tensorRT\common\ilogger.hpp" />
@@ -94,6 +104,7 @@
     <ClInclude Include="src\tensorRT\common\trt_tensor.hpp" />
     <ClInclude Include="src\tensorRT\infer\trt_infer.hpp" />
     <ClInclude Include="src\tensorRT\onnxplugin\onnxplugin.hpp" />
+    <ClInclude Include="src\tensorRT\onnxplugin\plugins\DCNv1.hpp" />
     <ClInclude Include="src\tensorRT\onnxplugin\plugin_binary_io.hpp" />
     <ClInclude Include="src\tensorRT\onnx\onnx-ml.pb.h" />
     <ClInclude Include="src\tensorRT\onnx\onnx-operators-ml.pb.h" />
@@ -130,12 +141,17 @@
     <CudaCompile Include="src\application\app_yolo_fast\yolov5_decode.cu" />
     <CudaCompile Include="src\application\app_yolo_fast\yolox_decode.cu" />
     <CudaCompile Include="src\application\app_yolo_gpuptr\yolo_gpuptr_decode.cu" />
+    <CudaCompile Include="src\application\app_yolo_pose\yolo_decode_pose.cu" />
     <CudaCompile Include="src\tensorRT\common\preprocess_kernel.cu" />
+    <CudaCompile Include="src\tensorRT\onnxplugin\plugins\DCNv1.cu" />
     <CudaCompile Include="src\tensorRT\onnxplugin\plugins\DCNv2.cu" />
     <CudaCompile Include="src\tensorRT\onnxplugin\plugins\HSwish.cu" />
   </ItemGroup>
   <ItemGroup>
     <None Include="src\tensorRT\onnx_parser\readme.md" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Users\Administrator\Pictures\hand.jpg" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
@@ -170,7 +186,7 @@
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
   <ImportGroup Label="ExtensionSettings">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.6.props" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.props" />
   </ImportGroup>
   <ImportGroup Label="Shared">
   </ImportGroup>
@@ -188,8 +204,8 @@
     <LinkIncremental>true</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include;./lean/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;./lean/opencv3.4.6/include;./lean/TensorRT-8.5.3.1/include;./lean/protobuf3.11.4/include;./src;./src/tensorRT;./src/tensorRT/common;./src/application/tools/Eigen;./src/application;$(IncludePath)</IncludePath>
-    <LibraryPath>./lean/TensorRT-8.5.3.1/lib;./lean/opencv3.4.6/lib;./lean/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;./lean/protobuf3.11.4/lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\include;./lean/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;./lean/opencv3.4.6/include;./lean/TensorRT-8.5.3.1/include;./lean/protobuf3.11.4/include;./src;./src/tensorRT;./src/tensorRT/common;./src/application/tools/Eigen;./src/application;$(IncludePath)</IncludePath>
+    <LibraryPath>./lean/TensorRT-8.5.3.1/lib;./lean/opencv3.4.6/lib;./lean/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;./lean/protobuf3.11.4/lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v10.2\lib;$(LibraryPath)</LibraryPath>
     <TargetName>$(ProjectName)d</TargetName>
     <CopyLocalProjectReference>true</CopyLocalProjectReference>
   </PropertyGroup>
@@ -197,8 +213,8 @@
     <LinkIncremental>false</LinkIncremental>
     <OutDir>$(SolutionDir)$(Platform)\</OutDir>
     <IntDir>$(Platform)\$(Configuration)\</IntDir>
-    <IncludePath>C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\include;$(SolutionDir)3rdParty/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;$(SolutionDir)3rdParty\opencv3.4.6/include;$(SolutionDir)3rdParty/TensorRT-8.5.3.1/include;$(SolutionDir)3rdParty/protobuf3.11.4/include;$(ProjectDir)src;$(ProjectDir)src/tensorRT;$(ProjectDir)src/tensorRT/common;$(ProjectDir)src/application/tools/Eigen;$(ProjectDir)src/application;$(IncludePath)</IncludePath>
-    <LibraryPath>$(SolutionDir)3rdParty/TensorRT-8.5.3.1/lib;$(SolutionDir)3rdParty/cudnn-windows-x86_64-8.9.5.29_cuda11-archive;$(SolutionDir)3rdParty/protobuf3.11.4/lib;C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.6\lib;$(SolutionDir)3rdParty\opencv3.4.6/lib;$(LibraryPath)</LibraryPath>
+    <IncludePath>$(SolutionDir)3rdParty\cuda12.2\include;$(SolutionDir)3rdParty\opencv4.9.0-cuda/include;$(SolutionDir)3rdParty/TensorRT-8.6.1.6/include;$(SolutionDir)3rdParty/TensorRT-8.6.1.6/samples/common;$(SolutionDir)3rdParty/protobuf3.11.4/include;$(ProjectDir)src;$(ProjectDir)src/tensorRT;$(ProjectDir)src/tensorRT/common;$(ProjectDir)src/application/tools/Eigen;$(ProjectDir)src/application;$(ProjectDir);$(IncludePath)</IncludePath>
+    <LibraryPath>$(SolutionDir)3rdParty/TensorRT-8.6.1.6/lib;$(SolutionDir)3rdParty/protobuf3.11.4/lib;$(SolutionDir)3rdParty/cuda12.2\lib;$(SolutionDir)3rdParty\opencv4.9.0-cuda/lib;$(LibraryPath)</LibraryPath>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Python|x64'">
     <LinkIncremental>false</LinkIncremental>
@@ -256,17 +272,19 @@
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
-      <EnableCOMDATFolding>true</EnableCOMDATFolding>
-      <OptimizeReferences>true</OptimizeReferences>
+      <EnableCOMDATFolding>false</EnableCOMDATFolding>
+      <OptimizeReferences>
+      </OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalDependencies>%(AdditionalDependencies)</AdditionalDependencies>
       <ModuleDefinitionFile>
       </ModuleDefinitionFile>
-      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories);$(CudaToolkitLibDir)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
     <CudaCompile>
-      <CodeGeneration>compute_61,sm_61</CodeGeneration>
+      <CodeGeneration>compute_89,sm_89;compute_86,sm_86;compute_61,sm_61;compute_75,sm_75</CodeGeneration>
       <Defines>ONNX_ML</Defines>
+      <GPUDebugInfo>true</GPUDebugInfo>
     </CudaCompile>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Python|x64'">
@@ -300,6 +318,6 @@
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
-    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 11.6.targets" />
+    <Import Project="$(VCTargetsPath)\BuildCustomizations\CUDA 12.2.targets" />
   </ImportGroup>
 </Project>

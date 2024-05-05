@@ -89,9 +89,9 @@ namespace TRT {
 	};
 
 	enum class TRT_EXPORT Mode : int {
-		FP32,
-		FP16,
-		INT8
+		FP32=1,
+		FP16=2,
+		INT8=3
 	};
 
 	TRT_EXPORT const char* mode_string(Mode type);

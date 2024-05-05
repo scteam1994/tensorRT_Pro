@@ -10,8 +10,8 @@
 #include <string>
 #include <future>
 #include <opencv2/opencv.hpp>
-#include <common/trt_tensor.hpp>
-#include <common/object_detector.hpp>
+#include <tensorRT/common/trt_tensor.hpp>
+#include <application/common/object_detector.hpp>
 
 /**
  * @brief 发挥极致的性能体验

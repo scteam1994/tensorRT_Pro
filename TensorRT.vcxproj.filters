@@ -80,6 +80,15 @@
     <Filter Include="src\application\app_alphapose_old">
       <UniqueIdentifier>{b35635fa-76e2-4b8a-988b-19370ca1b03a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\application\app_handpose">
+      <UniqueIdentifier>{32edb1b6-519d-4bf5-94df-7ea8e93e7685}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\application\app_movenet">
+      <UniqueIdentifier>{6a8fbef9-161c-469f-9a2b-dd066dd46fae}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\application\app_yolo_pose">
+      <UniqueIdentifier>{b9cf0f3e-7dc8-420b-a7b3-d1c09e661586}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="src\tensorRT\builder\trt_builder.cpp">
@@ -178,9 +187,6 @@
     <ClCompile Include="src\tensorRT\import_lib.cpp">
       <Filter>src\tensorRT</Filter>
     </ClCompile>
-    <ClCompile Include="src\application\app_yolo\yolo.cpp">
-      <Filter>src\application\app_yolo</Filter>
-    </ClCompile>
     <ClCompile Include="src\application\app_yolo\multi_gpu.cpp">
       <Filter>src\application\app_yolo</Filter>
     </ClCompile>
@@ -211,10 +217,28 @@
     <ClCompile Include="src\application\app_alphapose_old\alpha_pose_old.cpp">
       <Filter>src\application\app_alphapose_old</Filter>
     </ClCompile>
-    <ClCompile Include="src\face_sdk.cpp">
+    <ClCompile Include="face_sdk.cpp">
       <Filter>src</Filter>
     </ClCompile>
-    <ClCompile Include="src\pose_sdk.cpp">
+    <ClCompile Include="src\application\app_handpose\handpose.cpp">
+      <Filter>src\application\app_handpose</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application\app_movenet\movenet.cpp">
+      <Filter>src\application\app_movenet</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application\tools\onnx2trt.cpp">
+      <Filter>src\application\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application\app_yolo_pose\yolo_pose.cpp">
+      <Filter>src\application\app_yolo_pose</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application\app_yolo\yolo.cpp">
+      <Filter>src\application\app_yolo</Filter>
+    </ClCompile>
+    <ClCompile Include="src\application\tools\kalman_kpt.cpp">
+      <Filter>src\application\tools</Filter>
+    </ClCompile>
+    <ClCompile Include="src\hand_person_pose_sdk.cpp">
       <Filter>src</Filter>
     </ClCompile>
   </ItemGroup>
@@ -357,9 +381,6 @@
     <ClInclude Include="src\application\tools\pybind11.hpp">
       <Filter>src\application\tools</Filter>
     </ClInclude>
-    <ClInclude Include="src\application\app_yolo\yolo.hpp">
-      <Filter>src\application\app_yolo</Filter>
-    </ClInclude>
     <ClInclude Include="src\application\app_yolo\multi_gpu.hpp">
       <Filter>src\application\app_yolo</Filter>
     </ClInclude>
@@ -378,14 +399,31 @@
     <ClInclude Include="src\application\app_alphapose_old\alpha_pose_old.hpp">
       <Filter>src\application\app_alphapose_old</Filter>
     </ClInclude>
-    <ClInclude Include="src\application\global_export.h">
+    <ClInclude Include="face_sdk.hpp" />
+    <ClInclude Include="global_export.h" />
+    <ClInclude Include="src\application\app_handpose\handpose.hpp">
+      <Filter>src\application\app_handpose</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\app_movenet\movenet.hpp">
+      <Filter>src\application\app_movenet</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\app_yolo_pose\yolo_pose.hpp">
+      <Filter>src\application\app_yolo_pose</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\app_yolo\yolo.hpp">
+      <Filter>src\application\app_yolo</Filter>
+    </ClInclude>
+    <ClInclude Include="src\application\tools\kalman_kpt.hpp">
+      <Filter>src\application\tools</Filter>
+    </ClInclude>
+    <ClInclude Include="src\hand_person_pose_sdk.hpp">
       <Filter>src</Filter>
     </ClInclude>
-    <ClInclude Include="src\face_sdk.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="src\application\app_yolo_pose\yolo_decode_pose.h">
+      <Filter>src\application\app_yolo_pose</Filter>
     </ClInclude>
-    <ClInclude Include="src\pose_sdk.hpp">
-      <Filter>src</Filter>
+    <ClInclude Include="src\tensorRT\onnxplugin\plugins\DCNv1.hpp">
+      <Filter>src\tensorRT\onnxplugin\plugins</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -425,11 +463,22 @@
     <CudaCompile Include="src\application\app_arcface\compare_face.cu">
       <Filter>src\application\app_arcface</Filter>
     </CudaCompile>
+    <CudaCompile Include="src\application\app_yolo_pose\yolo_decode_pose.cu">
+      <Filter>src\application\app_yolo_pose</Filter>
+    </CudaCompile>
+    <CudaCompile Include="src\tensorRT\onnxplugin\plugins\DCNv1.cu">
+      <Filter>src\tensorRT\onnxplugin\plugins</Filter>
+    </CudaCompile>
   </ItemGroup>
   <ItemGroup>
     <None Include="src\tensorRT\onnx_parser\readme.md">
       <Filter>src\tensorRT\onnx_parser</Filter>
     </None>
     <None Include="dll_export.def" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="..\..\..\..\Users\Administrator\Pictures\hand.jpg">
+      <Filter>src</Filter>
+    </Image>
   </ItemGroup>
 </Project>

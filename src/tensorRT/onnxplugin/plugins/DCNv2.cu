@@ -311,7 +311,7 @@ static void enqueue_native(cublasHandle_t handle, const std::vector<GTensor>& in
             DCNIm2colKernel<<<CUDATools::grid_dims(jobs), CUDATools::block_dims(jobs), 0, stream>>>(
                 datainput, offset, maskWorkspacePtr, data.height(), data.width(), kernel_size, kernel_size, 1, 1, 1, 1, 1, 1, data.channel(), data.batch(), data.channel(), deformable_group,
                 out.height(), out.width(), im2colWorkspacePtr, jobs
-            );
+                );
         );
 
         DataType* weightKernel = weights[0].ptr<DataType>();
@@ -325,7 +325,7 @@ static void enqueue_native(cublasHandle_t handle, const std::vector<GTensor>& in
             checkCudaKernel(
                 biasKernel<<<CUDATools::grid_dims(edge), CUDATools::block_dims(edge), 0, stream>>>(
                     out.ptr<DataType>(ibatch), weightBias, area, edge
-                );
+                    );
             );
         }
     }
@@ -355,7 +355,7 @@ public:
     }
 
     virtual void config_finish() override{
-        
+
         // INFO("weights = %d", config_->weights_.size());
         // for(int i = 0; i < config_->weights_.size(); ++i){
         // 	auto& w = config_->weights_[i];
@@ -369,7 +369,7 @@ public:
 
     size_t getWorkspaceSize(const nvinfer1::PluginTensorDesc* inputs, int32_t nbInputs, const nvinfer1::PluginTensorDesc* outputs,
         int32_t nbOutputs) const noexcept{
-            
+
         int kernel_size = 3;
         int deformable_group = 1;
         size_t im2colSize = (size_t)inputs[0].dims.d[1] * kernel_size * kernel_size * outputs[0].dims.d[2] * outputs[0].dims.d[3];
@@ -391,7 +391,7 @@ public:
     }
 
     int enqueue(const std::vector<GTensor>& inputs, std::vector<GTensor>& outputs, const std::vector<GTensor>& weights, void* workspace, cudaStream_t stream) {
-        
+
         if (config_->usage_dtype_ == TRT::DataType::Float) {
             enqueue_native<float>(cublasHandle_, inputs, outputs, weights, workspace, stream);
         }
