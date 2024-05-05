@@ -34,7 +34,6 @@ api
     // 中英结合，凑合看吧
 ```
 ## pose sdk
-不算个sdk，只是个demo，从这里开始新学的windows编译动态库，好在之前搞过linux的，所以没啥问题，不过还是花了不少时间，不过总算搞定了，以后应该不会这么麻烦了。
 ```c++
 
 int combine_infer_main() {
@@ -50,6 +49,5 @@ int combine_infer_main() {
     return 0;
 }
 ```
+在这个基础库中，只实现了人的关键点的返回，不包括动作识别的代码。返回结果以人为单位，区分身体，左右手。
 
-在src/combine_pose.cpp中示例了如何多线程和单线程进行推理，多线程demo中尝试了流水线异步infer，但是不知道为什么没有效果，添加了异步之后yolo的infer时间变得很长，总fps没有什么变化，不知道是不是和机器有关还是说和原项目中的 class InferImpl 中的机制有关，如果有人能运行起来这个项目，麻烦告诉我一下，谢谢。
-我已经试过取消infer_controller.hpp中的std::unique_lock<std::mutex> l(jobs_lock_);，没有效果。
